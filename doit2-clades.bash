@@ -22,13 +22,13 @@ echo 1>&2 '## Make species list'
 ${PIPELINE}/scripts/make-clades.pl \
 	   -M ${CLADES}/fixed.tsv \
 	   -c ${SPECIES_CUTOFF} \
-	   > ${CLADES}/species.tsv
+	   > ${CLADES}/species.txt
 
 echo 1>&2 '## Make genus list'
 ${PIPELINE}/scripts/make-clades.pl \
 	   -M ${CLADES}/fixed.tsv \
 	   -c ${GENUS_CUTOFF} \
-	   > ${CLADES}/genus.tsv
+	   > ${CLADES}/genus.txt
 
 echo 1>&2 '## Make .dot file'
 ${PIPELINE}/scripts/make-clades.pl \
