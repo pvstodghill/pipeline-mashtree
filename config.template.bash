@@ -8,8 +8,11 @@ COLLECTION=../collection/data
 
 # ------------------------------------------------------------------------
 
-SPECIES_CUTOFF=95.0
-GENUS_CUTOFF=70.0
+CLADE1_NAME=species
+CLADE1_CUTOFF=95.0
+# CLADE2_NAME=genera
+# CLADE2_CUTOFF=70.0
+
 # ------------------------------------------------------------------------
 
 # Uncomment to get packages from HOWTO
