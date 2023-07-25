@@ -13,13 +13,16 @@ mkdir -p ${MASHTREE}/tmp
 
 echo 1>&2 '# Run mashtree'
 
-mashtree \
-    --numcpus ${THREADS} \
+mashtree_bootstrap.pl \
     --outmatrix ${MASHTREE}/mashtree.tsv \
-    --outtree ${MASHTREE}/mashtree.dnd \
-    --mindepth 0 \
+    --reps ${BOOTSTRAP_REPS} \
+    --numcpus ${THREADS} \
     --tempdir ${MASHTREE}/tmp \
-    ${INPUTS}/*.fna
+    -- \
+    --outtree ${MASHTREE}/raw.mashtree.dnd \
+    --mindepth 0 \
+    ${INPUTS}/*.fna \
+    > ${MASHTREE}/mashtree.dnd
 
 # ------------------------------------------------------------------------
 # Done.
