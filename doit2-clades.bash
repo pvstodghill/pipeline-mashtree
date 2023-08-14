@@ -49,7 +49,7 @@ function run_clades {
     CLADE_NAME=$1
     CLADE_CUTOFF=$2
 
-    echo 1>&2 "# Making $CLADE_NAME"
+    echo 1>&2 "# Making ${CLADE_NAME}s"
     
     ${PIPELINE}/scripts/make-clades.pl \
 	       -M ${CLADES}/fixed.tsv \
