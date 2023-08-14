@@ -19,8 +19,10 @@ BOOTSTRAP_REPS=100
 
 CLADE1_NAME=species
 CLADE1_CUTOFF=95.0
+CLADE1_NAMES=local/species_names.tsv
 # CLADE2_NAME=genera
 # CLADE2_CUTOFF=70.0
+# CLADE2_NAMES=local/genus_names.tsv
 
 # ------------------------------------------------------------------------
 
