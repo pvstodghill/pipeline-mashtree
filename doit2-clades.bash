@@ -42,7 +42,9 @@ echo 1>&2 "# Computing sequence lengths"
 for FNA in ${INPUTS}/*.fna ; do
     NAME=$(basename $FNA .fna)
     LEN=$(${PIPELINE}/scripts/fasta-length < $FNA)
-    echo ${NAME}$'\t'${LEN} >> ${CLADES}/lens.tsv
+    echo ${NAME}$'\t'${LEN} \
+	| sed -f ${CLADES}/names.sed \
+	      >> ${CLADES}/lens.tsv
 done
 
 function run_clades {
@@ -53,36 +55,15 @@ function run_clades {
     
     ${PIPELINE}/scripts/make-clades.pl \
 	       -M ${CLADES}/fixed.tsv \
+	       -L ${CLADES}/lens.tsv \
 	       -c ${CLADE_CUTOFF} \
-	       -t > ${CLADES}/raw.${CLADE_NAME}.tsv
-
-    # Add lengths in third column
-
-    join -a 1 -e FIXME -t $'\t' -1 2 -2 1 \
-	 <(sort -k2,2 ${CLADES}/raw.${CLADE_NAME}.tsv) \
-	 ${CLADES}/lens.tsv \
-	| perl -ane 'print "$F[1]\t$F[0]\t$F[2]\n"' \
-	| sort -n \
-	       > ${CLADES}/${CLADE_NAME}.tsv
-
-    rm -f ${CLADES}/raw.${CLADE_NAME}.tsv
+	       -t > ${CLADES}/${CLADE_NAME}.tsv
 
     ${PIPELINE}/scripts/make-clades.pl \
 	       -M ${CLADES}/fixed.tsv \
+	       -L ${CLADES}/lens.tsv \
 	       -c ${CLADE_CUTOFF} \
-	       > ${CLADES}/raw.${CLADE_NAME}.txt
-
-    # Add lengths in names
-    cat ${CLADES}/lens.tsv \
-	| sed -E -e 's|^(.*)\t(.*)|s/\\<\1\\>/\& [\2]/|' \
-	      > ${CLADES}/raw.${CLADE_NAME}.sed
-    cat ${CLADES}/raw.${CLADE_NAME}.txt \
-	| sed -f ${CLADES}/raw.${CLADE_NAME}.sed \
-	      > ${CLADES}/${CLADE_NAME}.txt
-
-    rm -f ${CLADES}/raw.${CLADE_NAME}.txt
-    rm -f ${CLADES}/raw.${CLADE_NAME}.sed
-
+	       > ${CLADES}/${CLADE_NAME}.txt
 }
 
 if [ "$CLADE1_NAME" ] ; then
