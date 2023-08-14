@@ -12,6 +12,11 @@ BOOTSTRAP_REPS=100
 
 # ------------------------------------------------------------------------
 
+# # a tab-delimed file for replicon name substitutions (*cough* Prokka *cough*)
+# # - column 1: replicon name as it appears in input genomes
+# # - column 2: replicon name as it should appear in the output
+# REPLICON_NAMES=local/names.txt
+
 CLADE1_NAME=species
 CLADE1_CUTOFF=95.0
 # CLADE2_NAME=genera

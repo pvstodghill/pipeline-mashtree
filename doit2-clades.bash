@@ -8,13 +8,33 @@ rm -rf ${CLADES}
 mkdir -p ${CLADES}
 
 # ------------------------------------------------------------------------
+# Creating the `sed` exprs for name substitutions
+# ------------------------------------------------------------------------
+
+if [ -z "${REPLICON_NAMES}" ] ; then
+    REPLICON_NAMES=/dev/null
+fi
+
+cat ${REPLICON_NAMES} \
+    | sed -e 's/ *#.*//' \
+    | grep -v '^$/' \
+    | tr '\t' '\a' \
+    | (
+    while IFS=$'\a' read OLD NEW ; do
+	echo "s/\<$OLD\>/$NEW/g"
+    done
+) > ${CLADES}/names.sed
+
+
+# ------------------------------------------------------------------------
 # Make clades
 # ------------------------------------------------------------------------
 
 echo 1>&2 "# Converting distances to %similarity's"
 
-${PIPELINE}/mashtree2pyani.pl \
-	   < ${MASHTREE}/mashtree.tsv \
+cat ${MASHTREE}/mashtree.tsv \
+    | ${PIPELINE}/mashtree2pyani.pl \
+    | sed -f ${CLADES}/names.sed \
 	   > ${CLADES}/fixed.tsv
 
 echo 1>&2 "# Computing sequence lengths"
