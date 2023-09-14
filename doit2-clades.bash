@@ -61,6 +61,8 @@ function run_clades {
     ${PIPELINE}/scripts/make-clades.pl \
 	       -M ${CLADES}/fixed.tsv \
 	       -L ${CLADES}/lens.tsv \
+	       -N ${CLADE_NAMES} \
+	       -U $(date +%Y-%m-%d). \
 	       -c ${CLADE_CUTOFF} \
 	       -t > ${CLADES}/${CLADE_NAME}.tsv
 
