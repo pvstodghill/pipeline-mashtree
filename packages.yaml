@@ -1,7 +1,7 @@
 # https://example.com/fixme
 ---
 image: pvstodghill/pipeline-mashtree
-version: 2023-04-11
+version: 2023-10-06
 commands:
   - mashtree
   - mashtree_bootstrap.pl
