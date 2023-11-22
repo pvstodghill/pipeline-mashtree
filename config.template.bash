@@ -8,7 +8,8 @@ COLLECTION=../collection/data
 
 # ------------------------------------------------------------------------
 
-BOOTSTRAP_REPS=100
+BOOTSTRAP_REPS=100 # Run mashtree_bootstrap.pl
+#BOOTSTRAP_REPS= # Run mashtree
 
 # ------------------------------------------------------------------------
 
