@@ -15,6 +15,8 @@ if [ -z "${REPLICON_NAMES}" ] ; then
     REPLICON_NAMES=/dev/null
 fi
 
+set +o pipefail
+
 cat ${REPLICON_NAMES} \
     | sed -e 's/ *#.*//' \
     | grep -v '^$/' \
@@ -25,6 +27,7 @@ cat ${REPLICON_NAMES} \
     done
 ) > ${CLADES}/names.sed
 
+set -o pipefail
 
 # ------------------------------------------------------------------------
 # Make clades
