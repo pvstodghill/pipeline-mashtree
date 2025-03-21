@@ -44,7 +44,7 @@ echo 1>&2 "# Computing sequence lengths"
 
 for FNA in ${INPUTS}/*.fna ; do
     NAME=$(basename $FNA .fna)
-    LEN=$(${PIPELINE}/scripts/fasta-length < $FNA)
+    LEN=$(${PIPELINE}/scripts/fasta-length -t < $FNA)
     echo ${NAME}$'\t'${LEN} \
 	| sed -f ${CLADES}/names.sed \
 	      >> ${CLADES}/lens.tsv
