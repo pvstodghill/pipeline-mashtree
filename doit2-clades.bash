@@ -23,7 +23,7 @@ cat ${REPLICON_NAMES} \
     | tr '\t' '\a' \
     | (
     while IFS=$'\a' read OLD NEW ; do
-	echo "s/\<$OLD\>/$NEW/g"
+	echo "s|\<$OLD\>|$NEW|g"
     done
 ) > ${CLADES}/names.sed
 
